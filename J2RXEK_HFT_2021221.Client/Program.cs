@@ -1,4 +1,5 @@
 ﻿using System;
+using J2RXEK_HFT_2021221.Data;
 
 namespace J2RXEK_HFT_2021221.Client
 {
@@ -6,7 +7,8 @@ namespace J2RXEK_HFT_2021221.Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ChampionshipDBContext db = new ChampionshipDBContext();
+            db.SaveChanges();
         }
     }
 }
