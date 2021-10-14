@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Models
 {
-    class Championship
+    public class Championship
     {
         [Key]
         public DateTime Year { get; set; }

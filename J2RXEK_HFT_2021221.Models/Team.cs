@@ -8,17 +8,20 @@ using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Models
 {
-    class Team
+    public class Team
     {
         [Key]
         public string Name { get; set; }
 
-        public int Points { get; set; }
+        public string TeamPrincipals { get; set; }
+
+        public string PowerUnit { get; set; }
 
         public int ChampionshipsWon { get; set; }
 
         [NotMapped]
         public virtual ICollection<Driver> Drivers { get; set; }
+        public virtual ICollection<Championship> Championship_Years { get; set; }
 
         public Team()
         {
@@ -28,6 +31,7 @@ namespace J2RXEK_HFT_2021221.Models
         [ForeignKey(nameof(Drivers))]
         public int Number { get; set; }
 
-
+        [ForeignKey(nameof(Championship_Years))]
+        public DateTime Year { get; set; }
     }
 }
