@@ -2,7 +2,7 @@
 
 namespace J2RXEK_HFT_2021221.Data
 {
-    public class Class1
+    public class ChampionshipDBContext
     {
     }
 }
