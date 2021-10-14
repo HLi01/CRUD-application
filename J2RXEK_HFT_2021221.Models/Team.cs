@@ -11,7 +11,7 @@ namespace J2RXEK_HFT_2021221.Models
     public class Team
     {
         [Key]
-        public string Name { get; set; }
+        public string TeamName { get; set; }
 
         public string TeamPrincipals { get; set; }
 
@@ -21,17 +21,16 @@ namespace J2RXEK_HFT_2021221.Models
 
         [NotMapped]
         public virtual ICollection<Driver> Drivers { get; set; }
-        public virtual ICollection<Championship> Championship_Years { get; set; }
+        [NotMapped]
+        public virtual Championship Championship { get; set; }
 
         public Team()
         {
             Drivers = new HashSet<Driver>();
         }
 
-        [ForeignKey(nameof(Drivers))]
-        public int Number { get; set; }
+        [ForeignKey(nameof(Championship))]
+        public string Location { get; set; }
 
-        [ForeignKey(nameof(Championship_Years))]
-        public DateTime Year { get; set; }
     }
 }

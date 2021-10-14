@@ -11,22 +11,16 @@ namespace J2RXEK_HFT_2021221.Models
     public class Championship
     {
         [Key]
-        public DateTime Year { get; set; }
+        public string Location { get; set; }
+
+        public DateTime Date { get; set; }
 
         [NotMapped]
         public virtual ICollection<Team> Teams { get; set; }
-        public virtual ICollection<Driver> Drivers { get; set; }
 
         public Championship()
         {
             Teams = new HashSet<Team>();
-            Drivers = new HashSet<Driver>();
         }
-
-        [ForeignKey(nameof(Teams))]
-        public string TeamName { get; set; }
-
-        [ForeignKey(nameof(Drivers))]
-        public int Number { get; set; }
     }
 }

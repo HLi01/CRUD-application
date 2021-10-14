@@ -15,7 +15,7 @@ namespace J2RXEK_HFT_2021221.Models
 
         public string Name { get; set; }
 
-        public DateTime DebutYear { get; set; }
+        public string DebutYear { get; set; }
 
         public bool IsChampion { get; set; }
 
@@ -23,7 +23,7 @@ namespace J2RXEK_HFT_2021221.Models
         public virtual Team Team { get; set; }
 
         [ForeignKey (nameof(Team))]
-        public int TeamName { get; set; }
+        public string TeamName { get; set; }
 
     }
 }
