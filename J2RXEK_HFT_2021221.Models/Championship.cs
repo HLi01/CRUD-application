@@ -11,6 +11,8 @@ namespace J2RXEK_HFT_2021221.Models
     public class Championship
     {
         [Key]
+        public string RaceID { get; set; }
+
         public string Location { get; set; }
 
         public DateTime Date { get; set; }

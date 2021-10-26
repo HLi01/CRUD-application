@@ -8,7 +8,7 @@ namespace J2RXEK_HFT_2021221.Data
     {
         public virtual DbSet<Driver> Drivers { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
-        public virtual DbSet<Championship> Championships { get; set; }
+        public virtual DbSet<Championship> Championship_2021 { get; set; }
 
         public ChampionshipDBContext()
         {
@@ -39,7 +39,7 @@ namespace J2RXEK_HFT_2021221.Data
             {
                 entity.HasOne(team => team.Championship)
                 .WithMany(championship => championship.Teams)
-                .HasForeignKey(team => team.Location)
+                .HasForeignKey(team => team.RaceID)
                 .OnDelete(DeleteBehavior.Restrict);
             });
 
@@ -57,24 +57,24 @@ namespace J2RXEK_HFT_2021221.Data
             Driver SCH = new Driver() { Name = "Mick Schumacher", Number = 47, DebutYear = "2021", IsChampion = false };
             Driver SP = new Driver() { Name = "Sergio Perez", Number = 11, DebutYear = "2011", IsChampion = false };
 
-            Team Merc = new Team() { TeamName= "Mercedes",TeamPrincipals="Toto Wolff",PowerUnit="Mercedes",ChampionshipsWon=7 };
-            Team Ferr = new Team() { TeamName = "Ferrari",TeamPrincipals="Mattia Binotto",PowerUnit="Ferrari",ChampionshipsWon=16 };
-            Team RedB = new Team() { TeamName = "Red Bull",TeamPrincipals="Christian Horner",PowerUnit="Honda",ChampionshipsWon=4 };
-            Team Alpha = new Team() { TeamName = "AlphaTauri",TeamPrincipals="Franz Tost",PowerUnit="Honda",ChampionshipsWon=0 };
-            Team Alp = new Team() { TeamName = "Alpine",TeamPrincipals="Marcin Budkowski",PowerUnit="Renault",ChampionshipsWon=2 };
-            Team Ast = new Team() { TeamName = "Aston Martin",TeamPrincipals="Otmar Szafnauer",PowerUnit="Mercedes",ChampionshipsWon=0 };
-            Team Alfa = new Team() { TeamName = "Alfa Romeo",TeamPrincipals="Frederic Vasseur",PowerUnit="Ferrari",ChampionshipsWon=5 };
-            Team Will = new Team() { TeamName = "Williams",TeamPrincipals="Jost Capito",PowerUnit="Mercedes",ChampionshipsWon=9 };
-            Team Haas = new Team() { TeamName = "Haas",TeamPrincipals="Guenther Steiner",PowerUnit="Ferrari",ChampionshipsWon=0 };
-            Team McL = new Team() { TeamName = "McLaren",TeamPrincipals="Andreas Seidl",PowerUnit="Mercedes",ChampionshipsWon=8 };
+            Team Merc = new Team() { TeamName= "Mercedes",TeamPrincipal="Toto Wolff",PowerUnit="Mercedes",ChampionshipsWon=7 };
+            Team Ferr = new Team() { TeamName = "Ferrari",TeamPrincipal="Mattia Binotto",PowerUnit="Ferrari",ChampionshipsWon=16 };
+            Team RedB = new Team() { TeamName = "Red Bull",TeamPrincipal="Christian Horner",PowerUnit="Honda",ChampionshipsWon=4 };
+            Team Alpha = new Team() { TeamName = "AlphaTauri",TeamPrincipal="Franz Tost",PowerUnit="Honda",ChampionshipsWon=0 };
+            Team Alp = new Team() { TeamName = "Alpine",TeamPrincipal="Marcin Budkowski",PowerUnit="Renault",ChampionshipsWon=2 };
+            Team Ast = new Team() { TeamName = "Aston Martin",TeamPrincipal="Otmar Szafnauer",PowerUnit="Mercedes",ChampionshipsWon=0 };
+            Team Alfa = new Team() { TeamName = "Alfa Romeo",TeamPrincipal="Frederic Vasseur",PowerUnit="Ferrari",ChampionshipsWon=5 };
+            Team Will = new Team() { TeamName = "Williams",TeamPrincipal="Jost Capito",PowerUnit="Mercedes",ChampionshipsWon=9 };
+            Team Haas = new Team() { TeamName = "Haas",TeamPrincipal="Guenther Steiner",PowerUnit="Ferrari",ChampionshipsWon=0 };
+            Team McL = new Team() { TeamName = "McLaren",TeamPrincipal="Andreas Seidl",PowerUnit="Mercedes",ChampionshipsWon=8 };
 
-            Championship first = new Championship() {Location="Bahrain",Date=DateTime.Parse("2021.03.28")};
-            Championship second = new Championship() { Location = "Italy", Date = DateTime.Parse("2021.04.18") };
-            Championship third = new Championship() { Location = "Portugal", Date = DateTime.Parse("2021.05.02") };
-            Championship fourth = new Championship() { Location ="Spain",Date=DateTime.Parse("2021.05.09")};
-            Championship fifth = new Championship() { Location = "Monaco", Date = DateTime.Parse("2021.05.23") };
-            Championship sixt = new Championship() { Location = "Azerbaijan", Date = DateTime.Parse("2021.06.06") };
-            Championship sevent = new Championship() { Location = "France", Date = DateTime.Parse("2021.06.20") };
+            Championship first = new Championship() { RaceID="BAH_03_28", Location = "Bahrain", Date = DateTime.Parse("2021.03.28") };
+            Championship second = new Championship() { RaceID = "ITA_04_18", Location = "Italy", Date = DateTime.Parse("2021.04.18") };
+            Championship third = new Championship() { RaceID = "POR_05_02", Location = "Portugal", Date = DateTime.Parse("2021.05.02") };
+            Championship fourth = new Championship() { RaceID = "SPA_05_09", Location ="Spain",Date=DateTime.Parse("2021.05.09")};
+            Championship fifth = new Championship() { RaceID = "MON_05_23", Location = "Monaco", Date = DateTime.Parse("2021.05.23") };
+            Championship sixt = new Championship() { RaceID = "AZE_06_06", Location = "Azerbaijan", Date = DateTime.Parse("2021.06.06") };
+            Championship sevent = new Championship() { RaceID = "FRA_06_20", Location = "France", Date = DateTime.Parse("2021.06.20") };
 
             modelbuilder.Entity<Driver>().HasData(LH,MV,SV,CL,LN,CS,PG,KR,FA,DR,GR,SCH,SP);
             modelbuilder.Entity<Team>().HasData(Merc,Ferr,RedB,Alpha,Ast,Alfa,Will,Haas,McL);

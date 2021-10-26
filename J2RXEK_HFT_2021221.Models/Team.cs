@@ -13,7 +13,7 @@ namespace J2RXEK_HFT_2021221.Models
         [Key]
         public string TeamName { get; set; }
 
-        public string TeamPrincipals { get; set; }
+        public string TeamPrincipal { get; set; }
 
         public string PowerUnit { get; set; }
 
@@ -30,7 +30,7 @@ namespace J2RXEK_HFT_2021221.Models
         }
 
         [ForeignKey(nameof(Championship))]
-        public string Location { get; set; }
+        public string RaceID { get; set; }
 
     }
 }
