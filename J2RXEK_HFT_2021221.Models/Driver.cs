@@ -24,6 +24,10 @@ namespace J2RXEK_HFT_2021221.Models
 
         [ForeignKey (nameof(Team))]
         public string TeamName { get; set; }
-
+        
+        public override bool Equals(object obj)
+        {
+            return Name == (obj as Driver).Name;
+        }
     }
 }
