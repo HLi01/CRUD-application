@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Logic
 {
-    interface ITeamLogics
+    public interface ITeamLogics
     {
         void Create(Team team);
         Team Read(string name);

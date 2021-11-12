@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Logic
 {
-    interface IDriverLogics
+    public interface IDriverLogics
     {
         void Create(Driver driver);
         Driver Read(int id);

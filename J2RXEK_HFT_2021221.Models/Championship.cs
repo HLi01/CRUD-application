@@ -10,15 +10,13 @@ namespace J2RXEK_HFT_2021221.Models
 {
     public class Championship
     {   
-        [NotMapped]
-        public static int[] points = new int[] { 25, 18, 15, 12, 10, 8, 6, 4, 2, 1 };
-
         [Key]
         public string RaceID { get; set; }
 
         public string Location { get; set; }
-        [Required]
-        public List<Driver> result { get; set; }
+
+        [NotMapped]
+        public virtual List<Driver> result { get; set; }
 
         public DateTime Date { get; set; }
 

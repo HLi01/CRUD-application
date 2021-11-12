@@ -47,7 +47,7 @@ namespace J2RXEK_HFT_2021221.Logic
         }
 
         //non-crud - Average position
-        public IEnumerable<KeyValuePair<string, int>> AvgPos()
+        public IEnumerable<KeyValuePair<string, int>> SumChampByEngines()
         {
             return championshipRepo.ReadAll().SelectMany(x => x.Teams).GroupBy(x => x.PowerUnit).Select(x => new KeyValuePair<string, int>(x.Key, x.Sum(x => x.ChampionshipsWon)));
         }
@@ -60,10 +60,11 @@ namespace J2RXEK_HFT_2021221.Logic
 
         public int Points(Driver driver, List<Driver> list)
         {
+            int[] points = new int[] { 25, 18, 15, 12, 10, 8, 6, 4, 2, 1 };
             int pointer = list.IndexOf(driver);
-            return Championship.points.ElementAt(pointer);
+            return points.ElementAt(pointer);
         }
-        //How many poins did Vettel score in Monaco? 
+        //How many poins did Vettel score? 
         public int VettelPoints()
         {
             Driver SV = new Driver() { Name = "Sebastian Vettel"};
@@ -73,6 +74,17 @@ namespace J2RXEK_HFT_2021221.Logic
                 sum += Points(SV, item);
             }
             return sum;
+        }
+        public bool HasAloPodium()
+        {
+            foreach (var item in championshipRepo.ReadAll())
+            {
+                if (item.result.Take(3).Contains(new Driver() {Name="Fernando Alonso" }))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

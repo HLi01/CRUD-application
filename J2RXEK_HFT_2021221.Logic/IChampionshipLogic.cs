@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Logic
 {
-    interface IChampionshipLogic
+    public interface IChampionshipLogic
     {
         void Create(Championship championship);
         Championship Read(string id);
