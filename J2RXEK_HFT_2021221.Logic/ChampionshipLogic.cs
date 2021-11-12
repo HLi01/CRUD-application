@@ -46,16 +46,10 @@ namespace J2RXEK_HFT_2021221.Logic
             championshipRepo.Update(championship);
         }
 
-        //non-crud - Average position
-        public IEnumerable<KeyValuePair<string, int>> SumChampByEngines()
+        //how many times did a driver win?
+        public int Wins(string name)
         {
-            return championshipRepo.ReadAll().SelectMany(x => x.Teams).GroupBy(x => x.PowerUnit).Select(x => new KeyValuePair<string, int>(x.Key, x.Sum(x => x.ChampionshipsWon)));
-        }
-
-        //how many times did Max Verstappen win?
-        public int MaxWins()
-        {
-            return championshipRepo.ReadAll().Where(x => x.result[0].Name == "Max Verstappen").Count();
+            return championshipRepo.ReadAll().Where(x => x.result[0].Name == name).Count();
         }
 
         public int Points(Driver driver, List<Driver> list)
@@ -75,11 +69,12 @@ namespace J2RXEK_HFT_2021221.Logic
             }
             return sum;
         }
-        public bool HasAloPodium()
+        //How many podiums? 
+        public bool HasPodium(string name)
         {
             foreach (var item in championshipRepo.ReadAll())
             {
-                if (item.result.Take(3).Contains(new Driver() {Name="Fernando Alonso" }))
+                if (item.result.Take(3).Contains(new Driver() {Name=name }))
                 {
                     return true;
                 }
