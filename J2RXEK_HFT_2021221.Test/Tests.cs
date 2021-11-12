@@ -30,12 +30,14 @@ namespace J2RXEK_HFT_2021221.Test
             Driver MV = new Driver() { Name = "Max Verstappen", Number = 33, DebutYear = "2014", IsChampion = false };
 
             Team Ferr = new Team() { TeamName = "Ferrari", TeamPrincipal = "Mattia Binotto", PowerUnit = "Ferrari", ChampionshipsWon = 16 };
+            Team Merc = new Team() { TeamName = "Mercedes", TeamPrincipal = "Toto Wolff", PowerUnit = "Mercedes", ChampionshipsWon = 7 };
+            Team Alfa = new Team() { TeamName = "Alfa Romeo", TeamPrincipal = "Frederic Vasseur", PowerUnit = "Ferrari", ChampionshipsWon = 5 };
             Team Alp = new Team() { TeamName = "Alpine", TeamPrincipal = "Marcin Budkowski", PowerUnit = "Renault", ChampionshipsWon = 2 };
             Team Ast = new Team() { TeamName = "Aston Martin", TeamPrincipal = "Otmar Szafnauer", PowerUnit = "Mercedes", ChampionshipsWon = 0 };
 
             Championship fifth = new Championship() { RaceID = "MON_05_23", Location = "Monaco", Date = DateTime.Parse("2021.05.23"), result = new List<Driver>() { MV, CS, null, null, SV, null, null, null, null, null } };
             mockDriverRepository.Setup((t) => t.ReadAll()).Returns(new List<Driver>() { SV, FA, CL, CS }.AsQueryable());
-            mockTeamRepository.Setup((t) => t.ReadAll()).Returns(new List<Team>() { Ferr,Alp,Ast }.AsQueryable());
+            mockTeamRepository.Setup((t) => t.ReadAll()).Returns(new List<Team>() { Ferr,Alp,Ast,Alfa,Merc }.AsQueryable());
             mockChampionshipRepository.Setup((t) => t.ReadAll()).Returns(new List<Championship>() {fifth}.AsQueryable());
 
             dl = new DriverLogic(mockDriverRepository.Object);
@@ -72,16 +74,19 @@ namespace J2RXEK_HFT_2021221.Test
 
             Assert.That(result.ToList(), Has.Exactly(1).Matches<Driver>(x=>x.Name==name));
         }
-        [Test]
-        public void SumChampsByEngine()
+        [TestCase("Ferrari",21)]
+        [TestCase("Renault",2)]
+        [TestCase("Mercedes",7)]
+        public void SumChampsByEngine(string team, int won)
         {
-            var result = cl.SumChampByEngines();
-            Assert.That(result.ToList(), Has.Exactly(1).Matches<Team>(x => x.PowerUnit == "Ferrari" && x.ChampionshipsWon==18));
+            var result = tl.SumChampByEngines();
+            Assert.AreEqual(3,result.Count());
+            Assert.IsTrue(result.Any(x=>x.Key==team && x.Value==won));
         }
-        [Test]
-        public void MaxWins()
+        [TestCase("Max Verstappen")]
+        public void MaxWins(string name)
         {
-            var result = cl.MaxWins();
+            var result = cl.Wins(name);
             Assert.That(result, Is.EqualTo(1));
         }
         [Test]
@@ -95,14 +100,12 @@ namespace J2RXEK_HFT_2021221.Test
         {
             Assert.That(() => { tl.ReadAll(); }, Is.Not.Null);
         }
-        [Test]
-        public void HasALoPodium()
+        [TestCase("Fernando Alonso",false)]
+        [TestCase("Carlos Sainz", true)]
+        public void HasPodium(string name, bool haspodium)
         {
-            var result = cl.HasAloPodium();
-            Assert.That(result, Is.False);
+            var result = cl.HasPodium(name);
+            Assert.That(result, Is.EqualTo(haspodium));
         }
-
-
-
     }
 }
