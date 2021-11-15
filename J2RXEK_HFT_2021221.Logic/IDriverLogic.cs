@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Logic
 {
-    public interface ITeamLogics
+    public interface IDriverLogic
     {
-        void Create(Team team);
-        Team Read(string name);
-        void Update(Team team);
-        void Delete(string name);
-        IEnumerable<Team> ReadAll();
+        void Create(Driver driver);
+        Driver Read(int id);
+        void Update(Driver driver);
+        void Delete(int id);
+        IEnumerable<Driver> ReadAll();
     }
 }

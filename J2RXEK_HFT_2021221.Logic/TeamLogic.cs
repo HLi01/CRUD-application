@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Logic
 {
-    public class TeamLogic : ITeamLogics
+    public class TeamLogic : ITeamLogic
     {
         ITeamRepository teamRepo;
 

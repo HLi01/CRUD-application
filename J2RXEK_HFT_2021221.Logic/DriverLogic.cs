@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Logic
 {
-    public class DriverLogic : IDriverLogics
+    public class DriverLogic : IDriverLogic
     {
         IDriverRepository driverRepo;
         public DriverLogic(IDriverRepository driverRepo)
