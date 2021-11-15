@@ -42,7 +42,7 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
         }
 
         // PUT /driver
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Put([FromBody] Driver value)
         {
             dl.Update(value);
