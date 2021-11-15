@@ -1,3 +1,6 @@
+using J2RXEK_HFT_2021221.Data;
+using J2RXEK_HFT_2021221.Logic;
+using J2RXEK_HFT_2021221.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +18,14 @@ namespace J2RXEK_HFT_2021221.Endpoint
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddTransient<IDriverLogic, DriverLogic>();
+            services.AddTransient<ITeamLogic, TeamLogic>();
+            services.AddTransient<IChampionshipLogic, ChampionshipLogic>();
+            services.AddTransient<IDriverRepository, DriverRepository>();
+            services.AddTransient<ITeamRepository, TeamRepository>();
+            services.AddTransient<IChampionshipRepository, ChampionshipRepository>();
+            services.AddTransient<ChampionshipDBContext, ChampionshipDBContext>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
