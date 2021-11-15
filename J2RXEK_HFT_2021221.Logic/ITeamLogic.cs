@@ -14,5 +14,6 @@ namespace J2RXEK_HFT_2021221.Logic
         void Update(Team team);
         void Delete(string name);
         IEnumerable<Team> ReadAll();
+        IEnumerable<KeyValuePair<string, int>> SumChampByEngines();
     }
 }

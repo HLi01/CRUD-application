@@ -14,5 +14,7 @@ namespace J2RXEK_HFT_2021221.Logic
         void Update(Driver driver);
         void Delete(int id);
         IEnumerable<Driver> ReadAll();
+        IEnumerable<Driver> EvenNumbers();
+        int NumberOfChampions();
     }
 }

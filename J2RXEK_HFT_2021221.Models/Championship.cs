@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Models
@@ -15,8 +16,7 @@ namespace J2RXEK_HFT_2021221.Models
 
         public string Location { get; set; }
 
-        [NotMapped]
-        public virtual List<Driver> result { get; set; }
+        public string WinnerName { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -26,7 +26,6 @@ namespace J2RXEK_HFT_2021221.Models
         public Championship()
         {
             Teams = new HashSet<Team>();
-            result = new List<Driver>();
         }
     }
     

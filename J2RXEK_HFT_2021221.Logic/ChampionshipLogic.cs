@@ -12,10 +12,12 @@ namespace J2RXEK_HFT_2021221.Logic
     {
         IChampionshipRepository championshipRepo;
         ITeamRepository teamRepo;
-        public ChampionshipLogic(IChampionshipRepository championshipRepo, ITeamRepository teamRepo)
+        IDriverRepository driverRepo;
+        public ChampionshipLogic(IChampionshipRepository championshipRepo, ITeamRepository teamRepo, IDriverRepository driverRepo)
         {
             this.championshipRepo = championshipRepo;
             this.teamRepo = teamRepo;
+            this.driverRepo = driverRepo;
         }
         public void Create(Championship championship)
         {
@@ -49,37 +51,28 @@ namespace J2RXEK_HFT_2021221.Logic
         //how many times did a driver win?
         public int Wins(string name)
         {
-            return championshipRepo.ReadAll().Where(x => x.result[0].Name == name).Count();
+            return championshipRepo.ReadAll().Where(x => x.WinnerName == name).Count();
         }
 
-        public int Points(Driver driver, List<Driver> list)
+        //Is there a driver who debuted in provided year, and won a race? 
+        public bool DebutedAndWon(string debutYear)
         {
-            int[] points = new int[] { 25, 18, 15, 12, 10, 8, 6, 4, 2, 1 };
-            int pointer = list.IndexOf(driver);
-            return points.ElementAt(pointer);
-        }
-        //How many poins did Vettel score? 
-        public int VettelPoints()
-        {
-            Driver SV = new Driver() { Name = "Sebastian Vettel"};
-            int sum = 0;
-            foreach (var item in championshipRepo.ReadAll().Select(x=>x.result))
-            {
-                sum += Points(SV, item);
-            }
-            return sum;
-        }
-        //How many podiums? 
-        public bool HasPodium(string name)
-        {
+            var names = driverRepo.ReadAll().Where(x => x.DebutYear == debutYear).Select(x => x.Name);
             foreach (var item in championshipRepo.ReadAll())
             {
-                if (item.result.Take(3).Contains(new Driver() {Name=name }))
+                string name = item.WinnerName;
+                if (names.Contains(name))
                 {
                     return true;
                 }
             }
             return false;
+        }
+        
+        //When was the provided race?
+        public DateTime RaceDate(string id)
+        {
+            return championshipRepo.ReadAll().First(x=>x.RaceID==id).Date;
         }
     }
 }

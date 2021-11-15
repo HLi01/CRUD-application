@@ -14,5 +14,8 @@ namespace J2RXEK_HFT_2021221.Logic
         void Update(Championship championship);
         void Delete(string id);
         IEnumerable<Championship> ReadAll();
+        int Wins(string name);
+        bool DebutedAndWon(string debutYear);
+        DateTime RaceDate(string id);
     }
 }

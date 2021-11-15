@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Models
@@ -22,6 +23,7 @@ namespace J2RXEK_HFT_2021221.Models
         [NotMapped]
         public virtual ICollection<Driver> Drivers { get; set; }
         [NotMapped]
+        [JsonIgnore]
         public virtual Championship Championship { get; set; }
 
         public Team()
