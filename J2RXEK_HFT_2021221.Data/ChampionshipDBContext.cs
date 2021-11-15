@@ -64,8 +64,6 @@ namespace J2RXEK_HFT_2021221.Data
             Driver NL = new Driver() { Name = "Nicholas Latifi", Number = 6, DebutYear = "2020", IsChampion = false };
             Driver SCH = new Driver() { Name = "Mick Schumacher", Number = 47, DebutYear = "2021", IsChampion = false };
             Driver NM = new Driver() { Name = "Nikita Mazepin", Number = 9, DebutYear = "2021", IsChampion = false };
-            
-            
 
             Team Merc = new Team() { TeamName= "Mercedes",TeamPrincipal="Toto Wolff",PowerUnit="Mercedes",ChampionshipsWon=7 };
             Team Ferr = new Team() { TeamName = "Ferrari",TeamPrincipal="Mattia Binotto",PowerUnit="Ferrari",ChampionshipsWon=16 };
@@ -78,13 +76,13 @@ namespace J2RXEK_HFT_2021221.Data
             Team Haas = new Team() { TeamName = "Haas",TeamPrincipal="Guenther Steiner",PowerUnit="Ferrari",ChampionshipsWon=0 };
             Team McL = new Team() { TeamName = "McLaren",TeamPrincipal="Andreas Seidl",PowerUnit="Mercedes",ChampionshipsWon=8 };
 
-            Championship first = new Championship() { RaceID = "BAH_03_28", Location = "Bahrain", Date = DateTime.Parse("2021.03.28"), result = new List<Driver>() { LH, MV, VB, LN, SP, CL, DR, CS, YT, LS }};
-            Championship second = new Championship() { RaceID = "ITA_04_18", Location = "Italy", Date = DateTime.Parse("2021.04.18"), result = new List<Driver>() { MV,LH,LN,CL,CS,DR,PG,LS,EO,FA }};
-            Championship third = new Championship() { RaceID = "POR_05_02", Location = "Portugal", Date = DateTime.Parse("2021.05.02"), result = new List<Driver>() { LH,MV,VB,SP,LN,CL,EO,FA,DR,PG }};
-            Championship fourth = new Championship() { RaceID = "SPA_05_09", Location ="Spain",Date=DateTime.Parse("2021.05.09"), result = new List<Driver>() { LH,MV,VB,CL,SP,DR,CS,LN,EO,PG }};
-            Championship fifth = new Championship() { RaceID = "MON_05_23", Location = "Monaco", Date = DateTime.Parse("2021.05.23"), result = new List<Driver>() { MV,CS,LN,SP,SV,PG,LH,LS,EO,AG }};
-            Championship sixt = new Championship() { RaceID = "AZE_06_06", Location = "Azerbaijan", Date = DateTime.Parse("2021.06.06"), result = new List<Driver>() { SP,SV,PG,CL,LN,FA,YT,CS,DR,KR }};
-            Championship seventh = new Championship() { RaceID = "FRA_06_20", Location = "France", Date = DateTime.Parse("2021.06.20"), result = new List<Driver>() { MV,LH,SP,VB,LN,DR,PG,FA,SV,LS }};
+            Championship first = new Championship() { RaceID = "BAH_03_28", Location = "Bahrain", Date = DateTime.Parse("2021.03.28"), WinnerName=LH.Name };
+            Championship second = new Championship() { RaceID = "ITA_04_18", Location = "Italy", Date = DateTime.Parse("2021.04.18"), WinnerName = MV.Name};
+            Championship third = new Championship() { RaceID = "POR_05_02", Location = "Portugal", Date = DateTime.Parse("2021.05.02"), WinnerName = LH.Name};
+            Championship fourth = new Championship() { RaceID = "SPA_05_09", Location ="Spain",Date=DateTime.Parse("2021.05.09"), WinnerName = LH.Name};
+            Championship fifth = new Championship() { RaceID = "MON_05_23", Location = "Monaco", Date = DateTime.Parse("2021.05.23"), WinnerName = MV.Name};
+            Championship sixt = new Championship() { RaceID = "AZE_06_06", Location = "Azerbaijan", Date = DateTime.Parse("2021.06.06"), WinnerName = SP.Name};
+            Championship seventh = new Championship() { RaceID = "FRA_06_20", Location = "France", Date = DateTime.Parse("2021.06.20"), WinnerName = MV.Name};
 
             modelbuilder.Entity<Driver>().HasData(LH,VB,MV,SP,SV,LS,CL,CS,LN,DR,PG,YT,KR,AG,FA,EO,GR,NL,SCH,NM);
             modelbuilder.Entity<Team>().HasData(Merc,Ferr,RedB,Alpha,Ast,Alfa,Will,Haas,McL);
