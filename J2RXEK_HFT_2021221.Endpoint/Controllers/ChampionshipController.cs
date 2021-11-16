@@ -27,7 +27,7 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
 
         // GET /championship/
         [HttpGet("{id}")]
-        public Championship Get(string id)
+        public Championship Get(int id)
         {
             return cl.Read(id);
         }
@@ -48,7 +48,7 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
 
         // DELETE /championship/
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public void Delete(int id)
         {
             cl.Delete(id);
         }

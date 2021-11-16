@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace J2RXEK_HFT_2021221.Endpoint.Controllers
 {
     [Route("[controller]/[action]")]
@@ -47,23 +45,23 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
 
         //GET: stat/debutedandwon/
         [HttpGet("{debutYear}")]
-        public bool DebutedAndWon(string debutYear)
+        public bool DebutedAndIsChampion(string debutYear)
         {
-            return cl.DebutedAndWon(debutYear);
+            return cl.DebutedAndIsChampion(debutYear);
         }
 
         //GET: stat/wins/
-        [HttpGet("{name}")]
-        public int Wins(string name)
+        [HttpGet("{id}")]
+        public int Wins(int id)
         {
-            return cl.Wins(name);
+            return cl.Wins(id);
         }
 
         //GET: stat/racedate/
         [HttpGet("{id}")]
-        public DateTime RaceDate(string id)
+        public IEnumerable<Championship> RaceDate(int number)
         {
-            return cl.RaceDate(id);
+            return cl.RaceNumbers(number);
         }
     }
 }

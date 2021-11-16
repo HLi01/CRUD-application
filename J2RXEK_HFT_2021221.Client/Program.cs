@@ -100,6 +100,7 @@ namespace J2RXEK_HFT_2021221.Client
 
         static void CRUDMenu(string table)
         {
+            RestService rest = new RestService("http://localhost:65297");
             Console.WriteLine($"\nWhat would you like to do to {table}? \n");
             Console.WriteLine("1 - List.");
             Console.WriteLine("2 - Get a single element.");
@@ -107,8 +108,64 @@ namespace J2RXEK_HFT_2021221.Client
             Console.WriteLine("4 - Update an existing element.");
             Console.WriteLine("5 - Remove an existing element.");
             Console.WriteLine();
+            
+            int response = int.Parse(Console.ReadLine());
+            if (table=="driver")
+            {
+                switch (response)
+                {
+                    case 1:
+                        var result1 = rest.Get<Driver>("driver");
+                        foreach (var item in result1)
+                        {
+                            Console.WriteLine($"Name: {item.Name} ({item.Number}), Debut: {item.DebutYear}, Champion: {item.IsChampion}");
+                        }
+                        break;
+                    case 2:
+                        Console.Write("Give a driver id (number): ");
+                        var result2 = rest.GetSingle<Driver>("driver" + "/" + Console.ReadLine());
+                        Console.WriteLine($"Name: {result2.Name} ({result2.Number}), Debut: {result2.DebutYear}, Champion: {result2.IsChampion}");
+                        break;
+                    case 3:
+                        Console.Write("Give a driver name: ");
+                        string name = Console.ReadLine();
+                        Console.Write("Give a driver number: ");
+                        int number = int.Parse(Console.ReadLine());
+                        //Console.Write("Give a team: ");
+                        //string team = Console.ReadLine();
+                        Console.Write("Give a debut year: ");
+                        string debut = Console.ReadLine();
+                        Console.Write("Give if the driver is champion (true/false): ");
+                        bool champ = bool.Parse(Console.ReadLine());
+                        Driver newDriver = new Driver() { Name = name, Number = number, DebutYear = debut, IsChampion = champ };
+                        rest.Post<Driver>(newDriver,"driver");
+                        Console.WriteLine("Driver created successfully.");
+                        break;
+                    case 4:
+                        Console.Write("Give a driver number: ");
+                        int id4 = int.Parse(Console.ReadLine());
+                        Console.Write("Give a name: ");
+                        string name4 = Console.ReadLine();
+                        //Console.Write("Give a team: ");
+                        //string team4 = Console.ReadLine();
+                        Console.Write("Give a debut year: ");
+                        string debut4 = Console.ReadLine();
+                        Console.Write("Give if the driver is champion (true/false): ");
+                        bool champ4 = bool.Parse(Console.ReadLine());
+                        Driver updatedDriver = new Driver() { Name = name4, Number = id4, DebutYear = debut4, IsChampion = champ4 };
+                        rest.Put<Driver>(updatedDriver, "driver");
+                        break;
+                    case 5:
+                        Console.Write("Give a driver id: ");
+                        int id5 = int.Parse(Console.ReadLine());
+                        rest.Delete(id5, "driver");
+                        break;
+                    default: throw new MenuException("Given response is not valid!");
+                }
+            }
+            
         }
-        static int MainMenu()
+        public static int MainMenu()
         {
             Console.WriteLine("\nGreetings! Which table do you want to edit? ");
             Console.WriteLine($"1 - Driver");
@@ -127,5 +184,6 @@ namespace J2RXEK_HFT_2021221.Client
         {
             public MenuException(string message) : base(message) { }
         }
+
     }
 }

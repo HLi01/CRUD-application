@@ -27,9 +27,9 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
 
         // GET /team/
         [HttpGet("{id}")]
-        public Team Get(string name)
+        public Team Get(int id)
         {
-            return tl.Read(name);
+            return tl.Read(id);
         }
 
         // POST /team
@@ -48,9 +48,9 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
 
         // DELETE /team/
         [HttpDelete("{id}")]
-        public void Delete(string name)
+        public void Delete(int id)
         {
-            tl.Delete(name);
+            tl.Delete(id);
         }
     }
 }
