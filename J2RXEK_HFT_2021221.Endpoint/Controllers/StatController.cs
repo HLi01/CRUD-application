@@ -57,9 +57,9 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
             return cl.Wins(id);
         }
 
-        //GET: stat/racedate/
-        [HttpGet("{id}")]
-        public IEnumerable<Championship> RaceDate(int number)
+        //GET: stat/racenumbers/
+        [HttpGet("{number}")]
+        public IEnumerable<Championship> RaceNumbers(int number)
         {
             return cl.RaceNumbers(number);
         }

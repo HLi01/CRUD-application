@@ -42,7 +42,7 @@ namespace J2RXEK_HFT_2021221.Repository
         {
             var OldRace = Read(race.Id);
             OldRace.Year = race.Year;
-            OldRace.Team = race.Team;
+            OldRace.WCC = race.WCC;
             OldRace.NumberOfRaces = race.NumberOfRaces;
             db.SaveChanges();
 

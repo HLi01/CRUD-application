@@ -23,6 +23,13 @@ namespace J2RXEK_HFT_2021221.Test
             var mockTeamRepository = new Mock<ITeamRepository>();
             var mockChampionshipRepository = new Mock<IChampionshipRepository>();
 
+            Team Ferr = new Team() { Id = 2, TeamName = "Ferrari", TeamPrincipal = "Mattia Binotto", PowerUnit = "Ferrari", ChampionshipsWon = 16 };
+            Team Merc = new Team() { Id = 1, TeamName = "Mercedes", TeamPrincipal = "Toto Wolff", PowerUnit = "Mercedes", ChampionshipsWon = 7 };
+            Team RedB = new Team() { Id = 3, TeamName = "Red Bull", TeamPrincipal = "Christian Horner", PowerUnit = "Honda", ChampionshipsWon = 4 };
+            Team Alfa = new Team() { Id = 7, TeamName = "Alfa Romeo", TeamPrincipal = "Frederic Vasseur", PowerUnit = "Ferrari", ChampionshipsWon = 5 };
+            Team Alp = new Team() { Id = 5, TeamName = "Alpine", TeamPrincipal = "Marcin Budkowski", PowerUnit = "Renault", ChampionshipsWon = 2 };
+            Team Ast = new Team() { Id = 6, TeamName = "Aston Martin", TeamPrincipal = "Otmar Szafnauer", PowerUnit = "Mercedes", ChampionshipsWon = 0 };
+
             Driver LH = new Driver() { Id = 1, Name = "Lewis Hamilton", Number = 44, DebutYear = "2007", IsChampion = true, TeamId = 1 };
             Driver SV = new Driver() { Id = 5, Name = "Sebastian Vettel", Number = 5, DebutYear = "2007", IsChampion = true, TeamId = 6 };
             Driver FA = new Driver() { Id = 15, Name = "Fernando Alonso", Number = 14, DebutYear = "2001", IsChampion = true, TeamId = 5 };
@@ -30,13 +37,6 @@ namespace J2RXEK_HFT_2021221.Test
             Driver CS = new Driver() { Id = 8, Name = "Carlos Sainz", Number = 55, DebutYear = "2015", IsChampion = false, TeamId = 2 };
             Driver MV = new Driver() { Id = 3, Name = "Max Verstappen", Number = 33, DebutYear = "2014", IsChampion = false, TeamId = 3 };
             Driver SP = new Driver() { Id = 4, Name = "Sergio Perez", Number = 11, DebutYear = "2011", IsChampion = false, TeamId = 3 };
-
-            Team Ferr = new Team() { Id = 2, TeamName = "Ferrari", TeamPrincipal = "Mattia Binotto", PowerUnit = "Ferrari", ChampionshipsWon = 16 };
-            Team Merc = new Team() { Id = 1, TeamName = "Mercedes", TeamPrincipal = "Toto Wolff", PowerUnit = "Mercedes", ChampionshipsWon = 7 };
-            Team RedB = new Team() { Id = 3, TeamName = "Red Bull", TeamPrincipal = "Christian Horner", PowerUnit = "Honda", ChampionshipsWon = 4 };
-            Team Alfa = new Team() { Id = 7, TeamName = "Alfa Romeo", TeamPrincipal = "Frederic Vasseur", PowerUnit = "Ferrari", ChampionshipsWon = 5 };
-            Team Alp = new Team() { Id = 5, TeamName = "Alpine", TeamPrincipal = "Marcin Budkowski", PowerUnit = "Renault", ChampionshipsWon = 2 };
-            Team Ast = new Team() { Id = 6, TeamName = "Aston Martin", TeamPrincipal = "Otmar Szafnauer", PowerUnit = "Mercedes", ChampionshipsWon = 0 };
             
             Championship first = new Championship() { Id = 1, Year = 2008, WCC = Ferr.Id, NumberOfRaces = 18 };
             Championship second = new Championship() { Id = 2, Year = 2001, WCC = Ferr.Id, NumberOfRaces = 17 };
@@ -101,7 +101,7 @@ namespace J2RXEK_HFT_2021221.Test
             Assert.That(result, Is.EqualTo(number));
         }
         [TestCase(19)]
-        public void RaceDate(int number)
+        public void RaceNumbers(int number)
         {
             var result = cl.RaceNumbers(number);
             Assert.AreEqual(3, result.Count());

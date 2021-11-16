@@ -24,11 +24,9 @@ namespace J2RXEK_HFT_2021221.Models
         public int ChampionshipsWon { get; set; }
 
         [NotMapped]
-        [JsonIgnore]
         public virtual ICollection<Driver> Drivers { get; set; }
 
         [NotMapped]
-        [JsonIgnore]
         public virtual ICollection<Championship> Championships { get; set; }
 
         public Team()
@@ -36,10 +34,10 @@ namespace J2RXEK_HFT_2021221.Models
             Drivers = new HashSet<Driver>();
             Championships = new HashSet<Championship>();
         }
-        public override bool Equals(object obj)
-        {
-            return TeamName == (obj as Team).TeamName;
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    return TeamName == (obj as Team).TeamName;
+        //}
         //[ForeignKey(nameof(Championship))]
         //public int RaceID { get; set; }
 

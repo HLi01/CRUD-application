@@ -25,14 +25,6 @@ namespace J2RXEK_HFT_2021221.Models
 
         [ForeignKey(nameof(Team))]
         public int WCC { get; set; }
-
-        //[NotMapped]
-        //public virtual ICollection<Team> Teams { get; set; }
-
-        //public Championship()
-        //{
-        //    Teams = new HashSet<Team>();
-        //}
     }
     
 }

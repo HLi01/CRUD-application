@@ -27,7 +27,7 @@ namespace J2RXEK_HFT_2021221.Models
         [JsonIgnore]
         public virtual Team Team { get; set; }
 
-        [ForeignKey (nameof(Team))]
+        [ForeignKey(nameof(Team))]
         public int TeamId { get; set; }
         
         public override bool Equals(object obj)
