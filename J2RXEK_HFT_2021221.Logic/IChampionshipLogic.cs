@@ -10,12 +10,12 @@ namespace J2RXEK_HFT_2021221.Logic
     public interface IChampionshipLogic
     {
         void Create(Championship championship);
-        Championship Read(string id);
+        Championship Read(int id);
         void Update(Championship championship);
-        void Delete(string id);
+        void Delete(int id);
         IEnumerable<Championship> ReadAll();
-        int Wins(string name);
-        bool DebutedAndWon(string debutYear);
-        DateTime RaceDate(string id);
+        int Wins(int id);
+        bool DebutedAndIsChampion(string debutYear);
+        IEnumerable<Championship> RaceNumbers(int number);
     }
 }

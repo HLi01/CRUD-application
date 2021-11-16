@@ -12,6 +12,9 @@ namespace J2RXEK_HFT_2021221.Models
     public class Team
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
         public string TeamName { get; set; }
 
         public string TeamPrincipal { get; set; }
@@ -21,18 +24,24 @@ namespace J2RXEK_HFT_2021221.Models
         public int ChampionshipsWon { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Driver> Drivers { get; set; }
+
         [NotMapped]
         [JsonIgnore]
-        public virtual Championship Championship { get; set; }
+        public virtual ICollection<Championship> Championships { get; set; }
 
         public Team()
         {
             Drivers = new HashSet<Driver>();
+            Championships = new HashSet<Championship>();
         }
-
-        [ForeignKey(nameof(Championship))]
-        public string RaceID { get; set; }
+        public override bool Equals(object obj)
+        {
+            return TeamName == (obj as Team).TeamName;
+        }
+        //[ForeignKey(nameof(Championship))]
+        //public int RaceID { get; set; }
 
     }
 }

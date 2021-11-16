@@ -11,8 +11,8 @@ namespace J2RXEK_HFT_2021221.Repository
     {
         void Create(Driver driver);
         void Update(Driver driver);
-        Driver Read(int Number);
+        Driver Read(int id);
         IQueryable<Driver> ReadAll();
-        void Delete(int Number);
+        void Delete(int id);
     }
 }

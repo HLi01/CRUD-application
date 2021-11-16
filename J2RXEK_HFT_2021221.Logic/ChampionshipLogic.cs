@@ -21,19 +21,19 @@ namespace J2RXEK_HFT_2021221.Logic
         }
         public void Create(Championship championship)
         {
-            if (championship.Date.Year!=2021)
+            if (championship.Year<=1950 || championship.Year>2020)
             {
-                throw new ArgumentException("The year is not 2021!");
+                throw new ArgumentException("The year must be between 1950 and 2020!");
             }
             championshipRepo.Create(championship);
         }
 
-        public void Delete(string id)
+        public void Delete(int id)
         {
             championshipRepo.Delete(id);
         }
 
-        public Championship Read(string id)
+        public Championship Read(int id)
         {
             return championshipRepo.Read(id);
         }
@@ -48,20 +48,19 @@ namespace J2RXEK_HFT_2021221.Logic
             championshipRepo.Update(championship);
         }
 
-        //how many times did a driver win?
-        public int Wins(string name)
+        //how many times did a team win the WCC?
+        public int Wins(int id)
         {
-            return championshipRepo.ReadAll().Where(x => x.WinnerName == name).Count();
+            return championshipRepo.ReadAll().Where(x => x.WCC == id).Count();
         }
 
-        //Is there a driver who debuted in provided year, and won a race? 
-        public bool DebutedAndWon(string debutYear)
+        //Is there a driver who debuted in provided year, and that driver is a champion? 
+        public bool DebutedAndIsChampion(string debutYear)
         {
-            var names = driverRepo.ReadAll().Where(x => x.DebutYear == debutYear).Select(x => x.Name);
-            foreach (var item in championshipRepo.ReadAll())
+            var drivers = driverRepo.ReadAll().Where(x => x.DebutYear == debutYear);
+            foreach (var driver in drivers)
             {
-                string name = item.WinnerName;
-                if (names.Contains(name))
+                if (driver.IsChampion == true)
                 {
                     return true;
                 }
@@ -69,10 +68,10 @@ namespace J2RXEK_HFT_2021221.Logic
             return false;
         }
         
-        //When was the provided race?
-        public DateTime RaceDate(string id)
+        //Given racenumbers
+        public IEnumerable<Championship> RaceNumbers(int number)
         {
-            return championshipRepo.ReadAll().First(x=>x.RaceID==id).Date;
+            return championshipRepo.ReadAll().Where(x => x.NumberOfRaces == number);
         }
     }
 }

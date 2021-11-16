@@ -11,8 +11,8 @@ namespace J2RXEK_HFT_2021221.Repository
     {
         void Create(Team team);
         void Update(Team team);
-        Team Read(string TeamName);
+        Team Read(int id);
         IQueryable<Team> ReadAll();
-        void Delete(string TeamName);
+        void Delete(int id);
     }
 }

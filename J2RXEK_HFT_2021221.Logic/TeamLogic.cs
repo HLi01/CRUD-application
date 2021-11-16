@@ -20,19 +20,19 @@ namespace J2RXEK_HFT_2021221.Logic
         {
             if (team.ChampionshipsWon<0)
             {
-                throw new ArgumentException("The number of championship won can't be a negative number!");
+                throw new ArgumentException("The number of championships won can't be a negative number!");
             }
             teamRepo.Create(team);
         }
 
-        public void Delete(string name)
+        public void Delete(int id)
         {
-            teamRepo.Delete(name);
+            teamRepo.Delete(id);
         }
 
-        public Team Read(string name)
+        public Team Read(int id)
         {
-            return teamRepo.Read(name);
+            return teamRepo.Read(id);
         }
 
         public IEnumerable<Team> ReadAll()
@@ -46,6 +46,7 @@ namespace J2RXEK_HFT_2021221.Logic
         }
         public IEnumerable<KeyValuePair<string, int>> SumChampByEngines()
         {
+            ;
             //return championshipRepo.ReadAll().SelectMany(x => x.Teams).GroupBy(x => x.PowerUnit).Select(x => new KeyValuePair<string, int>(x.Key, x.Sum(x => x.ChampionshipsWon)));
             return from x in teamRepo.ReadAll()
                    group x by x.PowerUnit into g

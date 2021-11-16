@@ -12,6 +12,9 @@ namespace J2RXEK_HFT_2021221.Models
     public class Driver
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
         public int Number { get; set; }
 
         public string Name { get; set; }
@@ -25,7 +28,7 @@ namespace J2RXEK_HFT_2021221.Models
         public virtual Team Team { get; set; }
 
         [ForeignKey (nameof(Team))]
-        public string TeamName { get; set; }
+        public int TeamId { get; set; }
         
         public override bool Equals(object obj)
         {

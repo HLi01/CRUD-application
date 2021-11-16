@@ -17,32 +17,33 @@ namespace J2RXEK_HFT_2021221.Repository
         }
         public void Create(Championship race)
         {
-            db.Championship_2021.Add(race);
+            db.Championship.Add(race);
             db.SaveChanges();
         }
 
-        public void Delete(string RaceID)
+        public void Delete(int id)
         {
-            var RaceToDelete = Read(RaceID);
-            db.Championship_2021.Remove(RaceToDelete);
+            var RaceToDelete = Read(id);
+            db.Championship.Remove(RaceToDelete);
             db.SaveChanges();
         }
 
-        public Championship Read(string RaceID)
+        public Championship Read(int id)
         {
-            return db.Championship_2021.FirstOrDefault(t => t.RaceID == RaceID);
+            return db.Championship.FirstOrDefault(t => t.Id == id);
         }
 
         public IQueryable<Championship> ReadAll()
         {
-            return db.Championship_2021;
+            return db.Championship;
         }
 
         public void Update(Championship race)
         {
-            var OldRace = Read(race.RaceID);
-            OldRace.Location = race.Location;
-            OldRace.Date = race.Date;
+            var OldRace = Read(race.Id);
+            OldRace.Year = race.Year;
+            OldRace.Team = race.Team;
+            OldRace.NumberOfRaces = race.NumberOfRaces;
             db.SaveChanges();
 
         }

@@ -21,16 +21,16 @@ namespace J2RXEK_HFT_2021221.Repository
             db.SaveChanges();
         }
 
-        public void Delete(int Number)
+        public void Delete(int id)
         {
-            var DriverToDelete = Read(Number);
+            var DriverToDelete = Read(id);
             db.Drivers.Remove(DriverToDelete);
             db.SaveChanges();
         }
 
-        public Driver Read(int Number)
+        public Driver Read(int id)
         {
-            return db.Drivers.FirstOrDefault(t => t.Number == Number);
+            return db.Drivers.FirstOrDefault(t => t.Id == id);
         }
 
         public IQueryable<Driver> ReadAll()
@@ -40,7 +40,7 @@ namespace J2RXEK_HFT_2021221.Repository
 
         public void Update(Driver driver)
         {
-            var OldDriver = Read(driver.Number);
+            var OldDriver = Read(driver.Id);
             OldDriver.Name = driver.Name;
             OldDriver.DebutYear = driver.DebutYear;
             OldDriver.IsChampion = driver.IsChampion;

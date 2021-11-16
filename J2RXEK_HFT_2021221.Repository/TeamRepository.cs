@@ -22,16 +22,16 @@ namespace J2RXEK_HFT_2021221.Repository
             db.SaveChanges();
         }
 
-        public void Delete(string TeamName)
+        public void Delete(int id)
         {
-            var TeamToDelete = Read(TeamName);
+            var TeamToDelete = Read(id);
             db.Teams.Remove(TeamToDelete);
             db.SaveChanges();
         }
 
-        public Team Read(string TeamName)
+        public Team Read(int id)
         {
-            return db.Teams.FirstOrDefault(t => t.TeamName == TeamName);
+            return db.Teams.FirstOrDefault(t => t.Id == id);
         }
 
         public IQueryable<Team> ReadAll()
@@ -41,10 +41,11 @@ namespace J2RXEK_HFT_2021221.Repository
 
         public void Update(Team team)
         {
-            var OldTeam = Read(team.TeamName);
+            var OldTeam = Read(team.Id);
+            OldTeam.TeamName = team.TeamName;
             OldTeam.TeamPrincipal = team.TeamPrincipal;
             OldTeam.PowerUnit = team.PowerUnit;
-            OldTeam.Championship = team.Championship;
+            OldTeam.ChampionshipsWon = team.ChampionshipsWon;
             db.SaveChanges();
         }
     }

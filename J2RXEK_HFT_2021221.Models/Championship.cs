@@ -10,23 +10,29 @@ using System.Threading.Tasks;
 namespace J2RXEK_HFT_2021221.Models
 {
     public class Championship
-    {   
+    {
         [Key]
-        public string RaceID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
 
-        public string Location { get; set; }
+        public int Year { get; set; }
 
-        public string WinnerName { get; set; }
-
-        public DateTime Date { get; set; }
+        public int NumberOfRaces { get; set; }
 
         [NotMapped]
-        public virtual ICollection<Team> Teams { get; set; }
+        [JsonIgnore]
+        public virtual Team Team { get; set; }
 
-        public Championship()
-        {
-            Teams = new HashSet<Team>();
-        }
+        [ForeignKey(nameof(Team))]
+        public int WCC { get; set; }
+
+        //[NotMapped]
+        //public virtual ICollection<Team> Teams { get; set; }
+
+        //public Championship()
+        //{
+        //    Teams = new HashSet<Team>();
+        //}
     }
     
 }

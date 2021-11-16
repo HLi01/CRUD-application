@@ -11,8 +11,8 @@ namespace J2RXEK_HFT_2021221.Repository
     {
         void Create(Championship championship);
         void Update(Championship championship);
-        Championship Read(string RaceID);
+        Championship Read(int id);
         IQueryable<Championship> ReadAll();
-        void Delete(string RaceID);
+        void Delete(int id);
     }
 }

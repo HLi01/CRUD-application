@@ -10,9 +10,9 @@ namespace J2RXEK_HFT_2021221.Logic
     public interface ITeamLogic
     {
         void Create(Team team);
-        Team Read(string name);
+        Team Read(int id);
         void Update(Team team);
-        void Delete(string name);
+        void Delete(int id);
         IEnumerable<Team> ReadAll();
         IEnumerable<KeyValuePair<string, int>> SumChampByEngines();
     }
