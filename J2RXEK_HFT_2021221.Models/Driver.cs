@@ -17,6 +17,8 @@ namespace J2RXEK_HFT_2021221.Models
 
         public int Number { get; set; }
 
+        public int Age { get; set; }
+
         public string Name { get; set; }
 
         public string DebutYear { get; set; }
