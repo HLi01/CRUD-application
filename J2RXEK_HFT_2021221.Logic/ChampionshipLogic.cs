@@ -81,7 +81,6 @@ namespace J2RXEK_HFT_2021221.Logic
         public string WinnerTeamInGivenYear(int year)
         {
             int winnerid = championshipRepo.ReadAll().Where(x => x.Year == year).Select(x => x.WCC).FirstOrDefault();
-            //return championshipRepo.ReadAll().Select(x=>x.Team).Where(x=>x.Id== championshipRepo.ReadAll().Where(x => x.Year == year).Select(x => x.WCC).FirstOrDefault()).Select(x=>x.TeamName).FirstOrDefault();
             return championshipRepo.ReadAll().Where(x => x.WCC == winnerid).Select(x => x.Team).FirstOrDefault().TeamName;
         }
     }
