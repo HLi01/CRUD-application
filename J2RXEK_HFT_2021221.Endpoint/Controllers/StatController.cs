@@ -13,13 +13,11 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
     public class StatController : ControllerBase
     {
         IDriverLogic dl;
-        ITeamLogic tl;
         IChampionshipLogic cl;
 
-        public StatController(IDriverLogic dl, ITeamLogic tl, IChampionshipLogic cl)
+        public StatController(IDriverLogic dl, IChampionshipLogic cl)
         {
             this.dl = dl;
-            this.tl = tl;
             this.cl = cl;
         }
 
@@ -37,19 +35,6 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
             return dl.NumberOfChampions();
         }
 
-        //GET: stat/sumchampbyengines
-        public IEnumerable<KeyValuePair<string, int>> SumChampByEngines()
-        {
-            return tl.SumChampByEngines();
-        }
-
-        //GET: stat/debutedandwon/
-        [HttpGet("{debutYear}")]
-        public bool DebutedAndIsChampion(string debutYear)
-        {
-            return cl.DebutedAndIsChampion(debutYear);
-        }
-
         //GET: stat/wins/
         [HttpGet("{id}")]
         public int Wins(int id)
@@ -57,11 +42,39 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
             return cl.Wins(id);
         }
 
-        //GET: stat/racenumbers/
+        //GET: stat/racenumber/
         [HttpGet("{number}")]
-        public IEnumerable<Championship> RaceNumbers(int number)
+        public string RaceNumber(int number)
         {
-            return cl.RaceNumbers(number);
+            return cl.RaceNumber(number);
+        }
+
+        //GET: stat/champsbyteam
+        [HttpGet]
+        public IEnumerable<KeyValuePair<string, int>> ChampsByTeam()
+        {
+            return cl.ChampsByTeam();
+        }
+
+        //GET: stat/firstdriversofteams
+        [HttpGet]
+        public IEnumerable<KeyValuePair<string, string>> FirstDriversOfTeams()
+        {
+            return cl.FirstDriversOfTeams();
+        }
+
+        //GET: stat/avgagebyteams
+        [HttpGet]
+        public IEnumerable<KeyValuePair<string, double>> AvgAgeByTeam()
+        {
+            return cl.AvgAgeByTeam();
+        }
+        
+        //GET: stat/winnerteamingivenyear/
+        [HttpGet("{year}")]
+        public string WinnerTeamInGivenYear(int year)
+        {
+            return cl.WinnerTeamInGivenYear(year);
         }
     }
 }
