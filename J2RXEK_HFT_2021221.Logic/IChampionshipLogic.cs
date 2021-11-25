@@ -15,7 +15,10 @@ namespace J2RXEK_HFT_2021221.Logic
         void Delete(int id);
         IEnumerable<Championship> ReadAll();
         int Wins(int id);
-        bool DebutedAndIsChampion(string debutYear);
-        IEnumerable<Championship> RaceNumbers(int number);
+        string RaceNumber(int number);
+        IEnumerable<KeyValuePair<string, int>> ChampsByTeam();
+        IEnumerable<KeyValuePair<string, string>> FirstDriversOfTeams();
+        IEnumerable<KeyValuePair<string, double>> AvgAgeByTeam();
+        string WinnerTeamInGivenYear(int year);
     }
 }

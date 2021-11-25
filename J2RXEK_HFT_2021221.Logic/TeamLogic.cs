@@ -44,11 +44,5 @@ namespace J2RXEK_HFT_2021221.Logic
         {
             teamRepo.Update(team);
         }
-        public IEnumerable<KeyValuePair<string, int>> SumChampByEngines()
-        {
-            return from x in teamRepo.ReadAll()
-                   group x by x.PowerUnit into g
-                   select new KeyValuePair<string, int>(g.Key, g.Sum(x => x.ChampionshipsWon));
-        }
     }
 }

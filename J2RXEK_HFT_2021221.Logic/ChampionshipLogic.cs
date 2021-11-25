@@ -12,12 +12,10 @@ namespace J2RXEK_HFT_2021221.Logic
     {
         IChampionshipRepository championshipRepo;
         ITeamRepository teamRepo;
-        IDriverRepository driverRepo;
-        public ChampionshipLogic(IChampionshipRepository championshipRepo, ITeamRepository teamRepo, IDriverRepository driverRepo)
+        public ChampionshipLogic(IChampionshipRepository championshipRepo, ITeamRepository teamRepo)
         {
             this.championshipRepo = championshipRepo;
             this.teamRepo = teamRepo;
-            this.driverRepo = driverRepo;
         }
         public void Create(Championship championship)
         {
@@ -53,25 +51,38 @@ namespace J2RXEK_HFT_2021221.Logic
         {
             return championshipRepo.ReadAll().Where(x => x.WCC == id).Count();
         }
-
-        //Is there a driver who debuted in provided year, and that driver is a champion? 
-        public bool DebutedAndIsChampion(string debutYear)
+        //Returns the driver's name whose number is equal to the given number
+        public string RaceNumber(int number)
         {
-            var drivers = driverRepo.ReadAll().Where(x => x.DebutYear == debutYear);
-            foreach (var driver in drivers)
-            {
-                if (driver.IsChampion == true)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return teamRepo.ReadAll().SelectMany(x=>x.Drivers).Where(x=>x.Number==number).FirstOrDefault().Name;
         }
-        
-        //Given racenumbers
-        public IEnumerable<Championship> RaceNumbers(int number)
+        //Returns the number of champions by team
+        public IEnumerable<KeyValuePair<string, int>> ChampsByTeam()
         {
-            return championshipRepo.ReadAll().Where(x => x.NumberOfRaces == number);
+            return from x in teamRepo.ReadAll().AsEnumerable()
+                   group x by x.TeamName into g
+                   select new KeyValuePair<string, int>(g.Key, g.SelectMany(x => x.Drivers).Where(x => x.IsChampion == true).Count());
+        }
+        //Returns the first driver's name of the teams(the driver who debuted first)
+        public IEnumerable<KeyValuePair<string, string>> FirstDriversOfTeams()
+        {
+            return from x in teamRepo.ReadAll().AsEnumerable()
+                   group x by x.TeamName into g
+                   select new KeyValuePair<string, string>(g.Key, g.SelectMany(x => x.Drivers).OrderBy(x => x.DebutYear).FirstOrDefault().Name);
+        }
+        //Average ages by teams
+        public IEnumerable<KeyValuePair<string, double>> AvgAgeByTeam()
+        {
+            return from x in teamRepo.ReadAll().AsEnumerable()
+                   group x by x.TeamName into g
+                   select new KeyValuePair<string, double>(g.Key, g.SelectMany(x => x.Drivers).Average(x=>x.Age));
+        }
+        //Which team won in the given year?
+        public string WinnerTeamInGivenYear(int year)
+        {
+            int winnerid = championshipRepo.ReadAll().Where(x => x.Year == year).Select(x => x.WCC).FirstOrDefault();
+            //return championshipRepo.ReadAll().Select(x=>x.Team).Where(x=>x.Id== championshipRepo.ReadAll().Where(x => x.Year == year).Select(x => x.WCC).FirstOrDefault()).Select(x=>x.TeamName).FirstOrDefault();
+            return championshipRepo.ReadAll().Where(x => x.WCC == winnerid).Select(x => x.Team).FirstOrDefault().TeamName;
         }
     }
 }
