@@ -34,12 +34,5 @@ namespace J2RXEK_HFT_2021221.Models
             Drivers = new HashSet<Driver>();
             Championships = new HashSet<Championship>();
         }
-        //public override bool Equals(object obj)
-        //{
-        //    return TeamName == (obj as Team).TeamName;
-        //}
-        //[ForeignKey(nameof(Championship))]
-        //public int RaceID { get; set; }
-
     }
 }
