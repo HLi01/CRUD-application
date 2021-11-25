@@ -45,14 +45,16 @@ namespace J2RXEK_HFT_2021221.Client
             Console.WriteLine("\nSelect which method do you want to run. \n");
             Console.WriteLine("1 - Drivers with even number");
             Console.WriteLine("2 - Number of world champions");
-            Console.WriteLine("3 - Sum of championships grouped by engines");
-            Console.WriteLine("4 - Exist a driver which debuted in provided year, and won a race");
-            Console.WriteLine("5 - Number of wins of the provided driver");
-            Console.WriteLine("6 - Date of the provided race");
+            Console.WriteLine("3 - Number of wins of the provided team");
+            Console.WriteLine("4 - Which driver has the given number");
+            Console.WriteLine("5 - Number of champions by team");
+            Console.WriteLine("6 - #1 drivers of the teams");
+            Console.WriteLine("7 - Average age by teams");
+            Console.WriteLine("8 - Winner team in the given year");
             Console.Write("\nAnswer: ");
 
             int response = int.Parse(Console.ReadLine());
-            if (response >= 1 && response <= 6)
+            if (response >= 1 && response <= 8)
             {
                 switch (response)
                 {
@@ -65,36 +67,45 @@ namespace J2RXEK_HFT_2021221.Client
                         break;
                     case 2: Console.WriteLine("Answer: " + rest.GetSingle<int>("stat/numberofchampions")); break;
                     case 3:
-                        var result3 = rest.Get<KeyValuePair<string, int>>("stat/sumchampbyengines");
-                        foreach (var item in result3)
-                        {
-                            Console.WriteLine("Engine: "+item.Key+", Championships: "+item.Value);
-                        }
-                        break;
+                        Console.Write("Give a team id: ");
+                        int id = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Answer: " + rest.GetSingle<int>("stat/wins/" + id)); break;
                     case 4:
-                        Console.Write("Give a debut year: ");
-                        int year = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Answer: "+rest.GetSingle<bool>("stat/debutedandwon/"+year)); break;
+                        Console.Write("Give a number: ");
+                        int racenumber = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Answer: "+rest.GetSingle<string>("stat/racenumber/" + racenumber)); break;
                     case 5:
-                        Console.Write("Give a driver name: ");
-                        string name = Console.ReadLine();
-                        Console.WriteLine("Answer: " + rest.GetSingle<int>("stat/wins/"+name.Trim())); break;
+                        var result5 = rest.Get<KeyValuePair<string, int>>("stat/champsbyteam");
+                        foreach (var item in result5)
+                        {
+                            Console.WriteLine($"{item.Key} : {item.Value}");
+                        } break;
                     case 6:
-                        Console.Write("Give the number of races: ");
-                        int num = int.Parse(Console.ReadLine());
-                        var result6 = rest.Get<Championship>("stat/racenumbers/" + num);
+                        var result6 = rest.Get<KeyValuePair<string, string>>("stat/firstdriversofteams");
                         foreach (var item in result6)
                         {
-                            Console.WriteLine($"\n Race Id: {item.Id}, Year: {item.Year}, WCC ID: {item.Id}, Number of races: {item.NumberOfRaces}");
+                            Console.WriteLine($"{item.Key} : {item.Value}");
                         }
                         break;
-                    default:
+                    case 7:
+                        var result7 = rest.Get<KeyValuePair<string, double>>("stat/avgagebyteam");
+                        foreach (var item in result7)
+                        {
+                            Console.WriteLine($"{item.Key} : {item.Value}");
+                        }
+                        break;
+                    case 8:
+                        Console.Write("Give a year: ");
+                        int year = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Answer: " + rest.GetSingle<string>("stat/winnerteamingivenyear/" + year)); 
                         break;
                 }
             }
             else
             {
+                
                 throw new MenuException("Given response is not valid!");
+
             }
         }
 
@@ -107,7 +118,7 @@ namespace J2RXEK_HFT_2021221.Client
             Console.WriteLine("3 - Create a new element.");
             Console.WriteLine("4 - Update an existing element.");
             Console.WriteLine("5 - Remove an existing element.");
-            Console.Write("\nAnswer: ");
+            Console.Write("\nChoice: ");
             
             int response = int.Parse(Console.ReadLine());
             if (table=="driver")
@@ -118,26 +129,28 @@ namespace J2RXEK_HFT_2021221.Client
                         var result1 = rest.Get<Driver>("driver");
                         foreach (var item in result1)
                         {
-                            Console.WriteLine($"Name: {item.Name} ({item.Number}), Debut: {item.DebutYear}, Champion: {item.IsChampion}");
+                            Console.WriteLine($"Name: {item.Name} ({item.Number}), Age:{item.Age}, Debut: {item.DebutYear}, Champion: {item.IsChampion}");
                         }
                         break;
                     case 2:
                         Console.Write("Give a driver id (number): ");
                         var result2 = rest.GetSingle<Driver>("driver" + "/" + Console.ReadLine());
-                        Console.WriteLine($"Name: {result2.Name} ({result2.Number}), Debut: {result2.DebutYear}, Champion: {result2.IsChampion}");
+                        Console.WriteLine($"Name: {result2.Name} ({result2.Number}), Age:{result2.Age}, Debut: {result2.DebutYear}, Champion: {result2.IsChampion}");
                         break;
                     case 3:
                         Console.Write("Give a driver name: ");
                         string name = Console.ReadLine();
                         Console.Write("Give a driver number: ");
                         int number = int.Parse(Console.ReadLine());
+                        Console.Write("Give a driver age: ");
+                        int age = int.Parse(Console.ReadLine());
                         Console.Write("Give a debut year: ");
                         string debut = Console.ReadLine();
                         Console.Write("Give a team Id: ");
                         int teamid = int.Parse(Console.ReadLine());
                         Console.Write("Give if the driver is champion (true/false): ");
                         bool champ = bool.Parse(Console.ReadLine());
-                        Driver newDriver = new Driver() { Name = name, Number = number, DebutYear = debut, IsChampion = champ, TeamId=teamid };
+                        Driver newDriver = new Driver() { Name = name, Number = number, Age=age, DebutYear = debut, IsChampion = champ, TeamId=teamid };
                         rest.Post<Driver>(newDriver,"driver");
                         Console.WriteLine("\nDriver created successfully.");
                         break;
@@ -279,7 +292,7 @@ namespace J2RXEK_HFT_2021221.Client
             Console.WriteLine($"3 - Championship");
             Console.WriteLine($"4 - Other - Non-crud methods");
             Console.WriteLine($"0 - Exit");
-            Console.Write("\nAnswer: ");
+            Console.Write("\nChoice: ");
             int response = int.Parse(Console.ReadLine());
             if (response >=0 && response <=4)
             {
