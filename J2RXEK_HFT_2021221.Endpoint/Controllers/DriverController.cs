@@ -1,10 +1,7 @@
 ﻿using J2RXEK_HFT_2021221.Logic;
 using J2RXEK_HFT_2021221.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Endpoint.Controllers
 {

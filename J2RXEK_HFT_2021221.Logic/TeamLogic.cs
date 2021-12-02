@@ -2,9 +2,6 @@
 using J2RXEK_HFT_2021221.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Logic
 {
@@ -18,7 +15,7 @@ namespace J2RXEK_HFT_2021221.Logic
         }
         public void Create(Team team)
         {
-            if (team.ChampionshipsWon<0)
+            if (team.ChampionshipsWon < 0)
             {
                 throw new ArgumentException("The number of championships won can't be a negative number!");
             }

@@ -1,6 +1,4 @@
-﻿using J2RXEK_HFT_2021221.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace J2RXEK_HFT_2021221.Client
 {
@@ -8,13 +6,13 @@ namespace J2RXEK_HFT_2021221.Client
     {
         static void Setup()
         {
-            Menu menu=new Menu();
+            Menu menu = new Menu();
             menu.clear += Clear;
             menu.input += Input;
             menu.write += Write;
             menu.writeline += WriteLine;
             menu.Start();
-            
+
         }
         static void Main(string[] args)
         {

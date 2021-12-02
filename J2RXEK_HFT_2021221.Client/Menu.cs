@@ -1,9 +1,6 @@
 ﻿using J2RXEK_HFT_2021221.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Client
 {
@@ -33,7 +30,7 @@ namespace J2RXEK_HFT_2021221.Client
         }
         public void MainMenu()
         {
-            string response="" ;
+            string response = "";
             while (response != "0")
             {
                 writeline?.Invoke("\nHello! Which table do you want to edit?\n");

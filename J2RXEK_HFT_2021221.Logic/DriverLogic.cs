@@ -3,8 +3,6 @@ using J2RXEK_HFT_2021221.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Logic
 {
@@ -17,7 +15,7 @@ namespace J2RXEK_HFT_2021221.Logic
         }
         public void Create(Driver driver)
         {
-            if (driver.Number <1 || driver.Number>99)
+            if (driver.Number < 1 || driver.Number > 99)
             {
                 throw new ArgumentException("The driver's number must be between 1 and 99!");
             }

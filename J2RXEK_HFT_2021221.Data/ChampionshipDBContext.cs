@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using J2RXEK_HFT_2021221.Models;
-using System.Collections.Generic;
+﻿using J2RXEK_HFT_2021221.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace J2RXEK_HFT_2021221.Data
 {
@@ -15,13 +13,13 @@ namespace J2RXEK_HFT_2021221.Data
         {
             this.Database.EnsureCreated();
         }
-        public ChampionshipDBContext(DbContextOptions<ChampionshipDBContext> options):base(options){ }
+        public ChampionshipDBContext(DbContextOptions<ChampionshipDBContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             if (!builder.IsConfigured)
             {
-                string conn= @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LocalDB.mdf;Integrated Security=True";
+                string conn = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LocalDB.mdf;Integrated Security=True";
                 builder.UseLazyLoadingProxies().UseSqlServer(conn);
             }
         }
@@ -34,7 +32,7 @@ namespace J2RXEK_HFT_2021221.Data
                 .WithMany(team => team.Drivers)
                 .HasForeignKey(driver => driver.TeamId)
                 .OnDelete(DeleteBehavior.Restrict);
-                
+
             });
             modelbuilder.Entity<Championship>(entity =>
             {
@@ -55,7 +53,7 @@ namespace J2RXEK_HFT_2021221.Data
             Team Haas = new Team() { Id = 9, TeamName = "Haas", TeamPrincipal = "Guenther Steiner", PowerUnit = "Ferrari", ChampionshipsWon = 0 };
             Team McL = new Team() { Id = 10, TeamName = "McLaren", TeamPrincipal = "Andreas Seidl", PowerUnit = "Mercedes", ChampionshipsWon = 8 };
 
-            Driver LH = new Driver() { Id=1, TeamId = Merc.Id, Name = "Lewis Hamilton", Number = 44, Age=36, DebutYear = "2007", IsChampion = true };
+            Driver LH = new Driver() { Id = 1, TeamId = Merc.Id, Name = "Lewis Hamilton", Number = 44, Age = 36, DebutYear = "2007", IsChampion = true };
             Driver VB = new Driver() { Id = 2, TeamId = Merc.Id, Name = "Valtteri Bottas", Number = 77, Age = 32, DebutYear = "2013", IsChampion = false };
             Driver MV = new Driver() { Id = 3, TeamId = RedB.Id, Name = "Max Verstappen", Number = 33, Age = 24, DebutYear = "2014", IsChampion = false };
             Driver SP = new Driver() { Id = 4, TeamId = RedB.Id, Name = "Sergio Perez", Number = 11, Age = 31, DebutYear = "2011", IsChampion = false };
@@ -67,7 +65,7 @@ namespace J2RXEK_HFT_2021221.Data
             Driver DR = new Driver() { Id = 10, TeamId = McL.Id, Name = "Daniel Ricciardo", Number = 3, Age = 32, DebutYear = "2011", IsChampion = false };
             Driver YT = new Driver() { Id = 11, TeamId = Alpha.Id, Name = "Yuki Tsunoda", Number = 22, Age = 21, DebutYear = "2021", IsChampion = false };
             Driver PG = new Driver() { Id = 12, TeamId = Alpha.Id, Name = "Pierre Gasly", Number = 10, Age = 25, DebutYear = "2017", IsChampion = false };
-            Driver KR = new Driver() { Id = 13, TeamId = Alfa.Id, Name = "Kimi Raikkönen", Number = 7, Age = 42, DebutYear = "2001", IsChampion = true};
+            Driver KR = new Driver() { Id = 13, TeamId = Alfa.Id, Name = "Kimi Raikkönen", Number = 7, Age = 42, DebutYear = "2001", IsChampion = true };
             Driver AG = new Driver() { Id = 14, TeamId = Alfa.Id, Name = "Antonio Giovinazzi", Number = 99, Age = 28, DebutYear = "2017", IsChampion = false };
             Driver FA = new Driver() { Id = 15, TeamId = Alp.Id, Name = "Fernando Alonso", Number = 14, Age = 40, DebutYear = "2001", IsChampion = true };
             Driver EO = new Driver() { Id = 16, TeamId = Alp.Id, Name = "Esteban Ocon", Number = 31, Age = 25, DebutYear = "2016", IsChampion = false };
@@ -76,8 +74,8 @@ namespace J2RXEK_HFT_2021221.Data
             Driver SCH = new Driver() { Id = 19, TeamId = Haas.Id, Name = "Mick Schumacher", Number = 47, Age = 22, DebutYear = "2021", IsChampion = false };
             Driver NM = new Driver() { Id = 20, TeamId = Haas.Id, Name = "Nikita Mazepin", Number = 9, Age = 22, DebutYear = "2021", IsChampion = false };
 
-            Championship first = new Championship() { Id=1, Year = 2008, WCC=Ferr.Id, NumberOfRaces=18 };
-            Championship second = new Championship() { Id = 2, Year = 2001, WCC = Ferr.Id, NumberOfRaces =17};
+            Championship first = new Championship() { Id = 1, Year = 2008, WCC = Ferr.Id, NumberOfRaces = 18 };
+            Championship second = new Championship() { Id = 2, Year = 2001, WCC = Ferr.Id, NumberOfRaces = 17 };
             Championship third = new Championship() { Id = 3, Year = 2010, WCC = RedB.Id, NumberOfRaces = 19 };
             Championship fourth = new Championship() { Id = 4, Year = 2011, WCC = RedB.Id, NumberOfRaces = 19 };
             Championship fifth = new Championship() { Id = 5, Year = 2012, WCC = RedB.Id, NumberOfRaces = 20 };
@@ -85,7 +83,7 @@ namespace J2RXEK_HFT_2021221.Data
             Championship seventh = new Championship() { Id = 7, Year = 2014, WCC = Merc.Id, NumberOfRaces = 19 };
 
             modelbuilder.Entity<Team>().HasData(Merc, Alpha, RedB, Ferr, Alp, Ast, Alfa, Will, Haas, McL);
-            modelbuilder.Entity<Driver>().HasData(LH,VB, PG, YT, SP, MV, CL, CS, EO, FA, SV, LS, KR, AG, GR, NL, SCH, NM, LN, DR);
+            modelbuilder.Entity<Driver>().HasData(LH, VB, PG, YT, SP, MV, CL, CS, EO, FA, SV, LS, KR, AG, GR, NL, SCH, NM, LN, DR);
             modelbuilder.Entity<Championship>().HasData(first, second, third, fourth, fifth, sixth, seventh);
 
         }

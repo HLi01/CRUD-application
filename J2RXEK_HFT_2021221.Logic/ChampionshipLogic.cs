@@ -3,8 +3,6 @@ using J2RXEK_HFT_2021221.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace J2RXEK_HFT_2021221.Logic
 {
@@ -19,7 +17,7 @@ namespace J2RXEK_HFT_2021221.Logic
         }
         public void Create(Championship championship)
         {
-            if (championship.Year<=1950 || championship.Year>2020)
+            if (championship.Year <= 1950 || championship.Year > 2020)
             {
                 throw new ArgumentException("The year must be between 1950 and 2020!");
             }
@@ -54,7 +52,7 @@ namespace J2RXEK_HFT_2021221.Logic
         //Returns the driver's name whose number is equal to the given number
         public string RaceNumber(int number)
         {
-            return teamRepo.ReadAll().SelectMany(x=>x.Drivers).Where(x=>x.Number==number).FirstOrDefault().Name;
+            return teamRepo.ReadAll().SelectMany(x => x.Drivers).Where(x => x.Number == number).FirstOrDefault().Name;
         }
         //Returns the number of champions by team
         public IEnumerable<KeyValuePair<string, int>> ChampsByTeam()
@@ -75,7 +73,7 @@ namespace J2RXEK_HFT_2021221.Logic
         {
             return from x in teamRepo.ReadAll().AsEnumerable()
                    group x by x.TeamName into g
-                   select new KeyValuePair<string, double>(g.Key, g.SelectMany(x => x.Drivers).Average(x=>x.Age));
+                   select new KeyValuePair<string, double>(g.Key, g.SelectMany(x => x.Drivers).Average(x => x.Age));
         }
         //Which team won in the given year?
         public string WinnerTeamInGivenYear(int year)
