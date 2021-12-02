@@ -181,13 +181,15 @@ namespace J2RXEK_HFT_2021221.Client
                         string name4 = input?.Invoke();
                         write?.Invoke("Give a number: ");
                         int number4 = int.Parse(input?.Invoke());
+                        write?.Invoke("Give a driver age: ");
+                        int age4 = int.Parse(input?.Invoke());
                         write?.Invoke("Give a debut year: ");
                         string debut4 = input?.Invoke();
                         write?.Invoke("Give if the driver is champion (true/false): ");
                         bool champ4 = bool.Parse(input?.Invoke());
                         write?.Invoke("Give a team Id: ");
                         int teamid4 = int.Parse(input?.Invoke());
-                        Driver updatedDriver = new Driver() { Id = id4, Name = name4, Number = number4, DebutYear = debut4, IsChampion = champ4, TeamId = teamid4 };
+                        Driver updatedDriver = new Driver() { Id = id4, Name = name4, Age = age4, Number = number4, DebutYear = debut4, IsChampion = champ4, TeamId = teamid4 };
                         rest.Put<Driver>(updatedDriver, "driver");
                         writeline?.Invoke("\nDriver updated successfully.");
                         break;
