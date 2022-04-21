@@ -1,4 +1,5 @@
 using J2RXEK_HFT_2021221.Data;
+using J2RXEK_HFT_2021221.Endpoint.Services;
 using J2RXEK_HFT_2021221.Logic;
 using J2RXEK_HFT_2021221.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -13,7 +14,6 @@ namespace J2RXEK_HFT_2021221.Endpoint
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
             services.AddTransient<IDriverLogic, DriverLogic>();
             services.AddTransient<ITeamLogic, TeamLogic>();
             services.AddTransient<IChampionshipLogic, ChampionshipLogic>();
@@ -21,6 +21,7 @@ namespace J2RXEK_HFT_2021221.Endpoint
             services.AddTransient<ITeamRepository, TeamRepository>();
             services.AddTransient<IChampionshipRepository, ChampionshipRepository>();
             services.AddTransient<ChampionshipDBContext, ChampionshipDBContext>();
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -35,6 +36,7 @@ namespace J2RXEK_HFT_2021221.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }

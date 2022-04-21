@@ -1,6 +1,8 @@
-﻿using J2RXEK_HFT_2021221.Logic;
+﻿using J2RXEK_HFT_2021221.Endpoint.Services;
+using J2RXEK_HFT_2021221.Logic;
 using J2RXEK_HFT_2021221.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
 
 namespace J2RXEK_HFT_2021221.Endpoint.Controllers
@@ -10,9 +12,11 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
     public class DriverController : ControllerBase
     {
         IDriverLogic dl;
-        public DriverController(IDriverLogic dl)
+        IHubContext<SignalRHub> hub;
+        public DriverController(IDriverLogic dl, IHubContext<SignalRHub> hub)
         {
             this.dl = dl;
+            this.hub = hub;
         }
 
         // GET: /driver
@@ -34,6 +38,7 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
         public void Post([FromBody] Driver value)
         {
             dl.Create(value);
+            this.hub.Clients.All.SendAsync("DriverCreated", value);
         }
 
         // PUT /driver
@@ -41,13 +46,16 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
         public void Put([FromBody] Driver value)
         {
             dl.Update(value);
+            this.hub.Clients.All.SendAsync("DriverUpdated", value);
         }
 
         // DELETE /driver/
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var driverToDelete = this.dl.Read(id);
             dl.Delete(id);
+            this.hub.Clients.All.SendAsync("DriverDeleted", driverToDelete);
         }
     }
 }

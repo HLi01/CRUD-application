@@ -1,0 +1,125 @@
+﻿<Window x:Class="J2RXEK_HFT_2021221.WpfClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:J2RXEK_HFT_2021221.WpfClient"
+        mc:Ignorable="d"
+        Title="Driver Editor" Height="650" Width="800">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0">
+            <Label Content="Drivers" />
+            <ListBox ItemsSource="{Binding Drivers}" SelectedItem="{Binding SelectedDriver}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Name" FontWeight="Bold" Background="LightBlue" Padding="10" VerticalContentAlignment="Center"/>
+            <TextBox Text="{Binding SelectedDriver.Name}" Padding="10" Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center"/>
+            <Label Content="Age" FontWeight="Bold" Background="LightBlue" Padding="10" Grid.Row="1" VerticalContentAlignment="Center"/>
+            <TextBox Text="{Binding SelectedDriver.Age}" Padding="10" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center"/>
+            <Label Content="Number" FontWeight="Bold" Background="LightBlue" Padding="10" Grid.Row="2" VerticalContentAlignment="Center"/>
+            <TextBox Text="{Binding SelectedDriver.Number}" Padding="10" Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center"/>
+            <Label Content="Debut year " FontWeight="Bold" Background="LightBlue" Padding="10" Grid.Row="3" VerticalContentAlignment="Center"/>
+            <TextBox Text="{Binding SelectedDriver.DebutYear}" Padding="10" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center"/>
+            <Label Content="Is a champion? " FontWeight="Bold" Background="LightBlue" Padding="10" Grid.Row="3" VerticalContentAlignment="Center"/>
+            <TextBox Text="{Binding SelectedDriver.IsChampion}" Padding="10" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center"/>
+            <Button Content="Create driver" Command="{Binding CreateDriver}" Grid.Row="0" Grid.Column="2" Margin="5" Width="120"></Button>
+            <Button Content="Delete driver" Command="{Binding DeleteDriver}" Grid.Row="1" Grid.Column="2" Margin="5" Width="120"></Button>
+            <Button Content="Update driver" Command="{Binding UpdateDriver}" Grid.Row="2" Grid.Column="2" Margin="5" Width="120"></Button>
+        </Grid>
+        
+        <StackPanel Grid.Row="1">
+            <Label Content="Teams" />
+            <ListBox ItemsSource="{Binding Teams}" SelectedItem="{Binding SelectedTeam}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding TeamName}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Content="TeamName" FontWeight="Bold" Background="LightBlue" Padding="10" VerticalContentAlignment="Center"/>
+            <TextBox Text="{Binding SelectedTeam.TeamName}" Padding="10" Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center"/>
+            <Label Content="Championships won" FontWeight="Bold" Background="LightBlue" Padding="10" Grid.Row="1" VerticalContentAlignment="Center"/>
+            <TextBox Text="{Binding SelectedTeam.ChampionshipsWon}" Padding="10" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center"/>
+            <Label Content="Power unit" FontWeight="Bold" Background="LightBlue" Padding="10" Grid.Row="2" VerticalContentAlignment="Center"/>
+            <TextBox Text="{Binding SelectedTeam.PowerUnit}" Padding="10" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center"/>
+            <Label Content="Team principal" FontWeight="Bold" Background="LightBlue" Padding="10" Grid.Row="3" VerticalContentAlignment="Center"/>
+            <TextBox Text="{Binding SelectedTeam.TeamPrincipal}" Padding="10" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center"/>
+            <Button Content="Create team" Command="{Binding CreateTeam}" Grid.Column="2" Margin="5" Width="120"></Button>
+            <Button Content="Delete team" Command="{Binding DeleteTeam}" Grid.Column="2" Grid.Row="1" Margin="5" Width="120"></Button>
+            <Button Content="Update team" Command="{Binding UpdateTeam}" Grid.Column="2" Grid.Row="2" Margin="5" Width="120"></Button>
+        </Grid>
+        <StackPanel Grid.Row="2">
+            <Label Content="Championships" />
+            <ListBox ItemsSource="{Binding Championships}" SelectedItem="{Binding SelectedChampionship}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Year}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Year" FontWeight="Bold" Background="LightBlue" Padding="10" />
+            <TextBox Text="{Binding SelectedChampionship.Year}" Padding="10" Grid.Row="0" Grid.Column="1"/>
+            <Label Content="Number of races" FontWeight="Bold" Background="LightBlue" Padding="10" Grid.Row="1"/>
+            <TextBox Text="{Binding SelectedChampionship.NumberOfRaces}" Padding="10" Grid.Row="1" Grid.Column="1"/>
+            <Button Content="Create championship" Command="{Binding CreateChampionship}" Grid.Column="2" Margin="5" Width="120"></Button>
+            <Button Content="Delete championship" Command="{Binding DeleteChampionship}" Grid.Column="2" Grid.Row="1" Margin="5" Width="120"></Button>
+            <Button Content="Update championship" Command="{Binding UpdateChampionship}" Grid.Column="2" Grid.Row="2" Margin="5" Width="120"></Button>
+        </Grid>
+    </Grid>
+</Window>
