@@ -25,7 +25,11 @@ namespace J2RXEK_HFT_2021221.WpfClient
                     selectedDriver = new Driver()
                     {
                         Name = value.Name,
-                        Id=value.Id
+                        Id = value.Id,
+                        Age=value.Age,
+                        Number = value.Number,
+                        DebutYear=value.DebutYear,
+                        TeamId=value.TeamId
                     };
                 }
                 SetProperty(ref selectedDriver, value);
@@ -43,7 +47,10 @@ namespace J2RXEK_HFT_2021221.WpfClient
                     selectedTeam = new Team()
                     {
                         TeamName = value.TeamName,
-                        Id = value.Id
+                        Id = value.Id,
+                        TeamPrincipal=value.TeamPrincipal,
+                        ChampionshipsWon=value.ChampionshipsWon,
+                        PowerUnit=value.PowerUnit
                     };
                 }
                 SetProperty(ref selectedTeam, value);
@@ -61,7 +68,9 @@ namespace J2RXEK_HFT_2021221.WpfClient
                     selectedChampionship = new Championship()
                     {
                         Year = value.Year,
-                        Id = value.Id
+                        Id = value.Id,
+                        NumberOfRaces=value.NumberOfRaces,
+                        WCC=value.WCC
                     };
                 }
                 SetProperty(ref selectedChampionship, value);
@@ -102,7 +111,10 @@ namespace J2RXEK_HFT_2021221.WpfClient
                       Drivers.Add(new Driver()
                       {
                           Name = SelectedDriver.Name,
-                          Number= SelectedDriver.Number
+                          Number= SelectedDriver.Number,
+                          Age=SelectedDriver.Age,
+                          DebutYear=SelectedDriver.DebutYear,
+
                       });
                   });
                 UpdateDriver = new RelayCommand(() =>
@@ -123,7 +135,9 @@ namespace J2RXEK_HFT_2021221.WpfClient
                     Teams.Add(new Team()
                     {
                         TeamName = SelectedTeam.TeamName,
-                        Id = SelectedTeam.Id
+                        ChampionshipsWon=SelectedTeam.ChampionshipsWon,
+                        PowerUnit=SelectedTeam.PowerUnit,
+                        TeamPrincipal=SelectedTeam.TeamPrincipal
                     });
                 });
                 UpdateTeam = new RelayCommand(() =>
@@ -144,7 +158,8 @@ namespace J2RXEK_HFT_2021221.WpfClient
                     Championships.Add(new Championship()
                     {
                         Year = SelectedChampionship.Year,
-                        Id = SelectedChampionship.Id
+                        NumberOfRaces= SelectedChampionship.NumberOfRaces,
+                        WCC=SelectedChampionship.WCC
                     });
                 });
                 UpdateChampionship = new RelayCommand(() =>

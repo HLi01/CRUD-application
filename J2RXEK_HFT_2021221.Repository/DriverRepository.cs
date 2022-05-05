@@ -39,6 +39,7 @@ namespace J2RXEK_HFT_2021221.Repository
             var OldDriver = Read(driver.Id);
             OldDriver.Name = driver.Name;
             OldDriver.Number = driver.Number;
+            OldDriver.Age = driver.Age;
             OldDriver.DebutYear = driver.DebutYear;
             OldDriver.IsChampion = driver.IsChampion;
             db.SaveChanges();

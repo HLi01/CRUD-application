@@ -38,7 +38,7 @@ namespace J2RXEK_HFT_2021221.Repository
         {
             var OldRace = Read(race.Id);
             OldRace.Year = race.Year;
-            OldRace.WCC = race.WCC;
+            //OldRace.WCC = race.WCC;
             OldRace.NumberOfRaces = race.NumberOfRaces;
             db.SaveChanges();
 

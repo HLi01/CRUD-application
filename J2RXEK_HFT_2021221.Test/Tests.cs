@@ -68,7 +68,7 @@ namespace J2RXEK_HFT_2021221.Test
             mockChampionshipRepository.Setup((t) => t.ReadAll()).Returns(new List<Championship>() { first, second, fourth, fifth, sixt, seventh }.AsQueryable());
 
             dl = new DriverLogic(mockDriverRepository.Object);
-            tl = new TeamLogic(mockTeamRepository.Object);
+            tl = new TeamLogic(mockTeamRepository.Object, mockDriverRepository.Object, mockChampionshipRepository.Object);
             cl = new ChampionshipLogic(mockChampionshipRepository.Object, mockTeamRepository.Object);
         }
         [Test]

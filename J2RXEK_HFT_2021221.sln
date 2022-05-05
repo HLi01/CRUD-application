@@ -28,7 +28,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{56F7D3
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "J2RXEK_HFT_2021221.WpfClient", "J2RXEK_HFT_2021221.WpfClient\J2RXEK_HFT_2021221.WpfClient.csproj", "{FFFA3E94-1722-4EA5-BA9C-1A1668B03A74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "J2RXEK_HFT_2021221.WpfClient", "J2RXEK_HFT_2021221.WpfClient\J2RXEK_HFT_2021221.WpfClient.csproj", "{FFFA3E94-1722-4EA5-BA9C-1A1668B03A74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "J2RXEK_HFT_2021221.JSClient", "J2RXEK_HFT_2021221.JSClient\J2RXEK_HFT_2021221.JSClient.csproj", "{156C66CF-18E6-4601-9129-EC235A1951B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +70,10 @@ Global
 		{FFFA3E94-1722-4EA5-BA9C-1A1668B03A74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFFA3E94-1722-4EA5-BA9C-1A1668B03A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFFA3E94-1722-4EA5-BA9C-1A1668B03A74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{156C66CF-18E6-4601-9129-EC235A1951B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{156C66CF-18E6-4601-9129-EC235A1951B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{156C66CF-18E6-4601-9129-EC235A1951B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{156C66CF-18E6-4601-9129-EC235A1951B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

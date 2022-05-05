@@ -2,16 +2,21 @@
 using J2RXEK_HFT_2021221.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace J2RXEK_HFT_2021221.Logic
 {
     public class TeamLogic : ITeamLogic
     {
         ITeamRepository teamRepo;
+        IDriverRepository driverRepo;
+        IChampionshipRepository championshipRepo;
 
-        public TeamLogic(ITeamRepository teamRepo)
+        public TeamLogic(ITeamRepository teamRepo, IDriverRepository driverRepo, IChampionshipRepository championshipRepo)
         {
             this.teamRepo = teamRepo;
+            this.driverRepo = driverRepo;
+            this.championshipRepo = championshipRepo;
         }
         public void Create(Team team)
         {
@@ -24,7 +29,11 @@ namespace J2RXEK_HFT_2021221.Logic
 
         public void Delete(int id)
         {
-            teamRepo.Delete(id);
+            if (!driverRepo.ReadAll().Any(x=>x.TeamId==id) && !championshipRepo.ReadAll().Any(x=>x.WCC==id))
+            {
+                ;
+                teamRepo.Delete(id);
+            }
         }
 
         public Team Read(int id)
