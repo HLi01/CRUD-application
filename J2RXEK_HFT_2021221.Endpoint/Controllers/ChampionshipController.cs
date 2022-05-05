@@ -1,6 +1,8 @@
-﻿using J2RXEK_HFT_2021221.Logic;
+﻿using J2RXEK_HFT_2021221.Endpoint.Services;
+using J2RXEK_HFT_2021221.Logic;
 using J2RXEK_HFT_2021221.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
 
 namespace J2RXEK_HFT_2021221.Endpoint.Controllers
@@ -10,9 +12,11 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
     public class ChampionshipController : ControllerBase
     {
         IChampionshipLogic cl;
-        public ChampionshipController(IChampionshipLogic cl)
+        IHubContext<SignalRHub> hub;
+        public ChampionshipController(IChampionshipLogic cl, IHubContext<SignalRHub> hub)
         {
             this.cl = cl;
+            this.hub = hub;
         }
 
         // GET: /championship
@@ -34,6 +38,7 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
         public void Post([FromBody] Championship value)
         {
             cl.Create(value);
+            this.hub.Clients.All.SendAsync("ChampionshipCreated", value);
         }
 
         // PUT /championship
@@ -41,13 +46,16 @@ namespace J2RXEK_HFT_2021221.Endpoint.Controllers
         public void Put([FromBody] Championship value)
         {
             cl.Update(value);
+            this.hub.Clients.All.SendAsync("ChampionshipUpdated", value);
         }
 
         // DELETE /championship/
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var championshipToDelete = this.cl.Read(id);
             cl.Delete(id);
+            this.hub.Clients.All.SendAsync("ChampionshipDeleted", championshipToDelete);
         }
     }
 }

@@ -50,7 +50,7 @@ namespace J2RXEK_HFT_2021221.WpfClient
                         Id = value.Id,
                         TeamPrincipal=value.TeamPrincipal,
                         ChampionshipsWon=value.ChampionshipsWon,
-                        PowerUnit=value.PowerUnit
+                        PowerUnit=value.PowerUnit,
                     };
                 }
                 SetProperty(ref selectedTeam, value);
@@ -114,6 +114,7 @@ namespace J2RXEK_HFT_2021221.WpfClient
                           Number= SelectedDriver.Number,
                           Age=SelectedDriver.Age,
                           DebutYear=SelectedDriver.DebutYear,
+                          TeamId=SelectedDriver.TeamId
 
                       });
                   });

@@ -7,27 +7,46 @@
 </head>
 <body>
     <h1>Driver Catalog</h1>
-    <div id="formdiv">
-        <label>Driver Name</label>
-        <input type="text" id="drivername" />
-        <label>Driver Number</label>
-        <input type="number" id="drivernumber" />
-        <label>Driver TeamId</label>
-        <input type="number" id="driverteamid" />
-        <button type="button" onclick="create()">Add Driver</button>
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="resultarea">
-        </tbody>
-    </table>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
-    <script src="script.js"></script>
+    <div class="float-container">
+        <div class="float-child">
+            <div id="formdiv">
+                <label>Driver Name</label><br />
+                <input type="text" id="drivername" /><br />
+                <label>Driver Age</label><br />
+                <input type="text" id="driverage" /><br />
+                <label>Driver Number</label><br />
+                <input type="number" id="drivernumber" /><br />
+                <label>Driver TeamId</label><br />
+                <input type="number" id="driverteamid" /><br />
+                <button type="button" onclick="create()">Add Driver</button>
+            </div>
+        </div>
+        <div class="float-child">
+            <div id="updateformdiv">
+                <label>Driver Name</label><br />
+                <input type="text" id="drivernametoupdate" /><br />
+                <label>Driver Age</label><br />
+                <input type="text" id="driveragetoupdate" /><br />
+                <label>Driver Number</label><br />
+                <input type="number" id="drivernumbertoupdate" /><br />
+                <label>Driver TeamId</label><br />
+                <input type="number" id="driverteamidtoupdate" /><br />
+                <button type="button" onclick="update()">Update Driver</button>
+            </div>
+        </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="resultarea">
+                </tbody>
+            </table>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+            <script src="script.js"></script>
+        </div>
 </body>
 </html>
